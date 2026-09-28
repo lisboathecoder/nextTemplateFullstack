@@ -35,6 +35,6 @@ export const crud = [
         verb: 'Get',
         description: 'Lista todas as séries',
         color: 'green',
-        icon: List,
+        Icon: List,
     }
 ];

@@ -1,4 +1,4 @@
-import { HardDrive, KeyRound, Server, List } from "lucide-react";
+import { HardDrive, KeyRound, Server, Layers3, PlusCircle } from "lucide-react";
 
 export const examples = [
   {
@@ -25,16 +25,24 @@ export const examples = [
       "Lista series consumidas no SessionStorage, sem api-key exposta.",
     color: "purple",
     Icon: HardDrive,
-    },
+  },
+  {
+    id: 4,
+    method: "Fullstack",
+    verb: "Get",
+    description: "Lista séries via API Route - Backend Intermediário",
+    color: "purple",
+    Icon: Layers3,
+  },
 ];
 
 export const crud = [
-    {
-        id: 2,
-        method: 'Read',
-        verb: 'Get',
-        description: 'Lista todas as séries',
-        color: 'green',
-        Icon: List,
-    }
+  {
+    id: 1,
+    method: "Create",
+    verb: "Post",
+    description: "Cria série via modal e API Route.",
+    color: "orange",
+    Icon: PlusCircle,
+  },
 ];

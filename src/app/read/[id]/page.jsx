@@ -2,11 +2,12 @@
 
 import FormModal from '@/components/FormModal';
 import ConfirmDelete from '@/components/ConfirmDelete';
-import { Button, Card, Skeleton, Link } from 'antd';
+import { Button, Card, Skeleton } from 'antd';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import Link from 'next/link';
 
 export default function ReadByIdPage() {
     const { id } = useParams();

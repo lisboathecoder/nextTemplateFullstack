@@ -1,6 +1,7 @@
-"use client";
+'use client';
 
 import FormModal from '@/components/FormModal';
+import ConfirmModal from '@/components/ConfirmDelete';
 import { Button, Card, Skeleton } from 'antd';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
@@ -31,9 +32,39 @@ export default function ReadByIdPage() {
         buscarSerie();
     }, [id]);
 
+    const handleUpdate = async (values) => {
+        setSaving(true);
+        try {
+            await axios.put(`/api/series/${id}`, values);
+            setSerie({ ...serie, ...values });
+            setEditOpen(false);
+            toast.success("Série atualizada com sucesso!", { id: "update-sucess" });
+        } catch (error) {
+            toast.error('Erro ao atualizar a série.', { id: "update-error" });
+            console.error(error);
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    const handleDelete = async () => {
+        setDeleting(true);
+        try {
+            await axios.delete(`/api/series/${id}`);
+            setSerie(null);
+            setDeleteOpen(false);
+            toast.success("Série excluída com sucesso!", { id: "delete-sucess" });
+        } catch (error) {
+            toast.error('Erro ao excluir série.', { id: "delete-error" });
+            console.error(error);
+        } finally {
+            setDeleting(false);
+        }
+    };
+
     return (
         <main>
-            <h2>Get By Id - read</h2>
+            <h2>Get By Id - read {serie && `${serie.title}`}</h2>
             <p>
                 O navegador busca, edita e exclui pelo /api/series/[id] (nosso route.js); o servidor
                 fala com a API usando a api-key privada
@@ -60,14 +91,23 @@ export default function ReadByIdPage() {
                             <Button type="danger" onClick={() => setDeleteOpen(true)}>
                                 Excluir
                             </Button>
-                            </div>
+                        </div>
 
-                            <FormModal
-                                openModal={editOpen}
-                                serie={serie}
-                                confirmLoading={saving}
-                                onCancel={() => setEditOpen(false)}
+                        <FormModal
+                            openModal={editOpen}
+                            serie={serie}
+                            confirmLoading={saving}
+                            onSubmit={handleUpdate}
+                            onCancel={() => setEditOpen(false)}
                             />
+
+                        <ConfirmDelete
+                            openModal={deleteOpen}
+                            serie={serie}
+                            confirmLoading={deleting}
+                            onSubmit={handleDelete}
+                            onCancel={() => setDeleteOpen(false)}
+                        />
                     </>
                 )
             )}

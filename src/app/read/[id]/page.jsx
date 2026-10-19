@@ -2,7 +2,7 @@
 
 import FormModal from '@/components/FormModal';
 import ConfirmDelete from '@/components/ConfirmDelete';
-import { Button, Card, Skeleton } from 'antd';
+import { Button, Card, Skeleton, Link } from 'antd';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -91,6 +91,9 @@ export default function ReadByIdPage() {
                             <Button type="danger" onClick={() => setDeleteOpen(true)}>
                                 Excluir
                             </Button>
+                            <Link href="/read">
+                                <Button type="primary">Ir para Get - Read</Button>
+                            </Link>
                         </div>
 
                         <FormModal
@@ -99,13 +102,13 @@ export default function ReadByIdPage() {
                             confirmLoading={saving}
                             onSubmit={handleUpdate}
                             onCancel={() => setEditOpen(false)}
-                            />
+                        />
 
                         <ConfirmDelete
                             openModal={deleteOpen}
                             serie={serie}
                             confirmLoading={deleting}
-                            onSubmit={handleDelete}
+                            onConfirm={handleDelete}
                             onCancel={() => setDeleteOpen(false)}
                         />
                     </>

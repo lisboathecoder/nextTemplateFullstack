@@ -1,7 +1,7 @@
 'use client';
 
 import FormModal from '@/components/FormModal';
-import ConfirmModal from '@/components/ConfirmDelete';
+import ConfirmDelete from '@/components/ConfirmDelete';
 import { Button, Card, Skeleton } from 'antd';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
